@@ -1,0 +1,112 @@
+SELECT <columns> FROM <table> OFFSET <skipped rows> ROWS FETCH NEXT <# of rows> ROWS ONLY;
+
+SELECT <columns> FROM <table> LIMIT <# of rows> OFFSET <skipped rows>;
+SELECT <columns> FROM <table> LIMIT <skipped rows>, <# of rows>; 
+
+SELECT * FROM table ORDER BY ASC/DESC LIMIT 10 OFFSET 10;
+
+SELECT column AS Column
+
+<function name>(<value or column>)
+
+SELECT first_name || " " || last_name || " <" || email || ">" AS "to_field" FROM patrons;
+
+SELECT <value or column> + <value or column> + <value or column>  FROM <table>;  
+
+SELECT column, LENGTH(<value or column>) FROM <tables>;
+
+SELECT title, LENGTH(title) AS new_name FROM books ORDER BY new_name DESC LIMIT 1;
+
+SELECT title, LENGTH(title) AS longest_length FROM books ORDER BY longest_length DESC LIMIT 1;
+
+SELECT first_name || " " || UPPER(last_name) AS full_name, library_id AS library_id FROM patrons;
+
+SELECT UPPER(<value or column>) FROM <table>;
+
+UPPER()
+LOWER()
+
+SELECT SUBSTR(<value or column>, <start>, <length>) FROM <table>;
+
+SELECT name, SUBSTR(description, 1, 50) || "..." AS short_description, price FROM table;
+
+SELECT * FROM <table> WHERE REPLACE(state, "Cali", "CA") = "CA";
+
+
+SELECT COUNT(*) FROM <table>;
+
+SELECT COUNT(*) FROM customers ORDER BY id DESC LIMIT 1;
+
+SELECT COUNT(id) AS scifi_book_count FROM books WHERE genre = "Science Fiction";
+
+SELECT DISTINCT column FROM products;
+
+SELECT column, COUNT(*) AS column_name FROM table GROUP BY column;
+
+SELECT SUM(<numeric column) FROM <table>;
+SELECT SUM(<numeric column) AS <alias> FROM <table>
+                                       GROUP BY <another column>
+									   HAVING column > 250
+                                       HAVING <alias> <operator> <value>;
+
+									   HAVING is the same as WHERE but you use it after calculations
+
+
+
+SELECT AVG(cost) AS average FROM table GROUP BY user_id;
+SELECT AVG(<numeric column>) FROM <table> GROUP BY <other column>;
+
+SELECT MAX(<numeric column>) AS maximum, MIN(<numeric column>) AS minimum FROM <table>;
+SELECT MAX(<numeric column>) FROM <table> GROUP BY <other column>;
+
+SELECT <numeric column> <mathematical operator> <numeric value> FROM <table>;
+
+SELECT column, ROUND (column * 1.06, 2) AS "Price in Florida" FROM table;
+SELECT name, ROUND (price / 1.40, 2) AS price_gbp FROM products;
+-----------
+FUNCTIONS
+-----------
+
+COUNT
+SUM
+AVG
+MAX
+MIN
+ROUND(column * value, decimal place)
+LENGTH
+
+-----------
+KEYWORDS
+-----------
+DISTINCT
+GROUP BY
+HAVING
+
+
+SELECT * FROM table WHERE status = "placed" AND ordered_on = DATE("now");
+
+MySQL
+=====
+To get the current date use: CURDATE()
+To get the current time use: CURTIME()
+To get the current date time: NOW()
+
+SELECT COUNT(*) AS shipped_today FROM orders WHERE status = "shipped" AND ordered_on = DATE("now");
+
+MODIFIER
+--------
+DATE("time string","modifier","modfier")
+
+SELECT COUNT(*) FROM orders WHERE ordered_on BETWEEN DATE("now", "-7 days") AND DATE("now", "-1 days");
+
+-----------
+FUNCTIONS
+-----------
+STRFTIME
+DATE
+TIME
+DATETIME
+
+SELECT *, STRFTIME("%d/%m/%Y", column_name) AS alias FROM table;
+
+SELECT title, STRFTIME("%m/%Y", date_released) AS month_year_released FROM movies;
